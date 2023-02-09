@@ -14,6 +14,9 @@ const CoinPage = () => {
 
   const { currency, symbol } = CryptoState();
 
+
+  //redux
+
   const fetchCoin = async () => {
     const { data } = await axios.get(SingleCoin(id));
 
@@ -24,6 +27,9 @@ const CoinPage = () => {
     fetchCoin();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+
+
 
   const useStyles = makeStyles((theme) => ({
     container: {

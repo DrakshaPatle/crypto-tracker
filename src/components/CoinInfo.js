@@ -12,11 +12,23 @@ import SelectButton from "./SelectButton";
 import { chartDays } from "../config/data";
 import { CryptoState } from "../CryptoContext";
 
+
+
+
+//redux 
+
 const CoinInfo = ({ coin }) => {
   const [historicData, setHistoricData] = useState();
   const [days, setDays] = useState(1);
   const { currency } = CryptoState();
   const [flag,setflag] = useState(false);
+
+
+
+
+
+
+
 
   const useStyles = makeStyles((theme) => ({
     container: {
@@ -36,6 +48,9 @@ const CoinInfo = ({ coin }) => {
     },
   }));
 
+
+//redux
+
   const classes = useStyles();
 
   const fetchHistoricData = async () => {
@@ -51,6 +66,11 @@ const CoinInfo = ({ coin }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [days]);
 
+
+
+
+
+
   const darkTheme = createTheme({
     palette: {
       primary: {
@@ -60,10 +80,28 @@ const CoinInfo = ({ coin }) => {
     },
   });
 
+
+
+
+
+
+
+
+
+
+
   return (
+
+
+    
     <ThemeProvider theme={darkTheme}>
       <div className={classes.container}>
+
+
+
         {!historicData | flag===false ? (
+
+
           <CircularProgress
             style={{ color: "gold" }}
             size={250}
@@ -98,6 +136,14 @@ const CoinInfo = ({ coin }) => {
                 },
               }}
             />
+
+
+
+
+
+
+
+            
             <div
               style={{
                 display: "flex",
@@ -107,6 +153,8 @@ const CoinInfo = ({ coin }) => {
               }}
             >
               {chartDays.map((day) => (
+
+
                 <SelectButton
                   key={day.value}
                   onClick={() => {setDays(day.value);
@@ -114,6 +162,9 @@ const CoinInfo = ({ coin }) => {
                   }}
                   selected={day.value === days}
                 >
+
+
+                  
                   {day.label}
                 </SelectButton>
               ))}
@@ -121,6 +172,9 @@ const CoinInfo = ({ coin }) => {
           </>
         )}
       </div>
+
+
+      
     </ThemeProvider>
   );
 };

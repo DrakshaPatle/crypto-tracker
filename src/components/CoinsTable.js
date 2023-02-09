@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
+
+// import{useSelector,useDispatch} from 'react-redux'
+
+// import {searchcoin} from "./redux/action"
+
 import Pagination from "@material-ui/lab/Pagination";
 import {
   Container,
@@ -24,6 +29,9 @@ import { CryptoState } from "../CryptoContext";
 export function numberWithCommas(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
+
+
+
 
 export default function CoinsTable() {
   const [coins, setCoins] = useState([]);
@@ -61,6 +69,11 @@ export default function CoinsTable() {
     },
   });
 
+
+  //redux
+
+
+
   const fetchCoins = async () => {
     setLoading(true);
     const { data } = await axios.get(CoinList(currency));
@@ -75,6 +88,8 @@ export default function CoinsTable() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currency]);
 
+
+
   const handleSearch = () => {
     return coins.filter(
       (coin) =>
@@ -82,6 +97,13 @@ export default function CoinsTable() {
         coin.symbol.toLowerCase().includes(search)
     );
   };
+
+
+
+
+
+
+
 
   return (
     <ThemeProvider theme={darkTheme}>
@@ -92,12 +114,25 @@ export default function CoinsTable() {
         >
           Cryptocurrency Prices by Market Cap
         </Typography>
+
+
+
+
+
+
         <TextField
           label="Search For a Crypto Currency.."
           variant="outlined"
           style={{ marginBottom: 20, width: "100%" }}
-          onChange={(e) => setSearch(e.target.value)}
+
+
+         onChange={(e) => setSearch(e.target.value)}
         />
+
+
+
+
+
         <TableContainer component={Paper}>
           {loading ? (
             <LinearProgress style={{ backgroundColor: "gold" }} />
@@ -121,17 +156,25 @@ export default function CoinsTable() {
                 </TableRow>
               </TableHead>
 
+
+
               <TableBody>
+
                 {handleSearch()
                   .slice((page - 1) * 10, (page - 1) * 10 + 10)
+
                   .map((row) => {
                     const profit = row.price_change_percentage_24h > 0;
                     return (
+
+
                       <TableRow
                         onClick={() => history.push(`/coins/${row.id}`)}
                         className={classes.row}
                         key={row.name}
                       >
+
+
                         <TableCell
                           component="th"
                           scope="row"
@@ -140,12 +183,17 @@ export default function CoinsTable() {
                             gap: 15,
                           }}
                         >
+
+
                           <img
                             src={row?.image}
                             alt={row.name}
                             height="50"
                             style={{ marginBottom: 10 }}
                           />
+
+
+                          
                           <div
                             style={{ display: "flex", flexDirection: "column" }}
                           >
@@ -161,6 +209,9 @@ export default function CoinsTable() {
                               {row.name}
                             </span>
                           </div>
+
+
+                          
                         </TableCell>
                         <TableCell align="right">
                           {symbol}{" "}
@@ -186,6 +237,7 @@ export default function CoinsTable() {
                       </TableRow>
                     );
                   })}
+                  
               </TableBody>
             </Table>
           )}

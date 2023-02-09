@@ -7,8 +7,13 @@ import { TrendingCoins } from "../../config/api";
 import { CryptoState } from "../../CryptoContext";
 import { numberWithCommas } from "../CoinsTable";
 
+
+
+//redux
 const Carousel = () => {
+  
   const [trending, setTrending] = useState([]);
+
   const { currency, symbol } = CryptoState();
 
   const fetchTrendingCoins = async () => {
@@ -18,10 +23,16 @@ const Carousel = () => {
     setTrending(data);
   };
 
+
   useEffect(() => {
     fetchTrendingCoins();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currency]);
+
+
+
+
+
 
   const useStyles = makeStyles((theme) => ({
     carousel: {
